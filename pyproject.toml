@@ -1,0 +1,40 @@
+[project]
+name = "chatdoc"
+version = "0.1.0"
+description = "ChatDoc is a web-based application that allows users to interact with and query multiple document types using a conversational AI interface. It supports PDF, TXT, CSV, and DOCX files, providing dynamic responses based on the content of uploaded documents."
+readme = "README.md"
+authors = [
+  { name = "hindav", email = "hindav@example.com" }, # Placeholder email as none was provided, or just name
+]
+maintainers = [
+  { name = "hindav" }
+]
+urls = { "LinkedIn" = "https://www.linkedin.com/in/hindav/" }
+requires-python = ">=3.9"
+dependencies = [
+    "streamlit>=1.38.0",
+    "langchain>=0.2.15",
+    "langchain-community>=0.2.15",
+    "langchain-openai>=0.1.23",
+    "exceptiongroup>=1.2.2",
+    "faiss-cpu>=1.8.0.post1",
+    "pypdf2>=3.0.1",
+    "python-dotenv>=1.0.1",
+    "unstructured>=0.15.9",
+    "transformers",
+    "torch>=2.4.1",
+    "langchain-huggingface",
+    "sentence-transformers",
+    "pillow",
+    "wordcloud",
+    "matplotlib",
+    "plotly",
+    "nltk",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
