@@ -2,49 +2,56 @@
 
 ### Chat with Your Documents using AI (RAG)
 
-Welcome to **AskMyDocs** — an AI-powered document chatbot that lets you upload documents and interact with them conversationally. Built using **Retrieval-Augmented Generation (RAG)**, this project combines modern AI retrieval, embeddings, and large language models to provide accurate answers directly from your files.
+Welcome to **AskMyDocs** — an AI-powered document chatbot that allows you to upload documents and interact with them conversationally. Built using **Retrieval-Augmented Generation (RAG)**, it combines document retrieval, embeddings, and large language models to deliver contextual answers directly from your files.
+
+---
+
+## 🎥 Project Demo
+
+[![Watch Demo](https://img.youtube.com/vi/sYKnJxIQ0pE/0.jpg)](https://youtu.be/sYKnJxIQ0pE)
+
+👉 Click the image above to watch the full demo video.
 
 ---
 
 ## ✨ Overview
 
-AskMyDocs enables intelligent document interaction through natural language queries. Instead of manually searching through files, you can simply ask questions and get contextual answers instantly.
+AskMyDocs simplifies document analysis using AI:
 
-The system processes documents, converts them into vector embeddings, retrieves relevant content, and generates responses using advanced LLM inference.
+* Upload multiple files
+* Ask questions naturally
+* Receive contextual AI-generated answers
+* Quickly extract insights without manual searching
 
-### 🎥 Project Demo
-
-<video src="Demo.mp4" controls width="700">
-Your browser does not support the video tag.
-</video>
+This project demonstrates how modern AI pipelines can transform document interaction and knowledge retrieval.
 
 ---
 
 ## 🚀 Features
 
-### 📂 Document Handling
+### 📂 Document Processing
 
-* Upload multiple documents (PDF, TXT, CSV, DOCX)
-* Automatic text extraction and preprocessing
-* Efficient vector embedding generation
+* Supports PDF, TXT, CSV, DOCX files
+* Automatic text extraction
+* Efficient document chunking and embedding
 
-### 🤖 AI Chat System
+### 🤖 AI Chatbot
 
-* Conversational Q&A from your documents
-* Context-aware memory retention
+* Conversational Q&A from documents
+* Context-aware responses
 * Retrieval-Augmented Generation pipeline
 
 ### 🧠 Smart Enhancements
 
-* Optional prompt refinement for better responses
-* Document summarization support
-* Fast inference powered by Groq LLMs
+* Optional prompt refinement
+* Document summarization
+* Fast inference powered by Groq LLM
 
 ### 💻 User Interface
 
-* Streamlit-based interactive UI
-* Clean and simple workflow
-* Quick document upload and querying
+* Streamlit interactive dashboard
+* Simple upload & chat workflow
+* Clean, responsive design
 
 ---
 
@@ -72,11 +79,11 @@ Your browser does not support the video tag.
 ## 📋 Requirements
 
 * Python 3.9+
-* UV package manager (recommended)
+* UV package manager recommended
 
-Install UV:
+Install uv:
 
-```bash
+```
 pip install uv
 ```
 
@@ -84,13 +91,13 @@ pip install uv
 
 ## 🔑 Environment Setup
 
-Create a `.env` file:
+Create `.env` file in root:
 
 ```
 GROQ_API_KEY=your_api_key_here
 ```
 
-This key is required for LLM inference.
+Required for AI inference.
 
 ---
 
@@ -98,7 +105,7 @@ This key is required for LLM inference.
 
 ### Clone Repository
 
-```bash
+```
 git clone https://github.com/hindav/AskMyDocs.git
 cd AskMyDocs
 ```
@@ -107,13 +114,13 @@ cd AskMyDocs
 
 Using uv:
 
-```bash
+```
 uv run streamlit run src/app.py
 ```
 
 Or:
 
-```bash
+```
 bash setup.sh
 ```
 
@@ -121,7 +128,7 @@ bash setup.sh
 
 ## ▶️ Access the App
 
-Open in browser:
+Open browser:
 
 ```
 http://localhost:8501
@@ -131,15 +138,15 @@ http://localhost:8501
 
 ## 📝 Usage
 
-1. Upload your documents
-2. System converts them to embeddings
+1. Upload documents
+2. System converts them into embeddings
 3. Ask questions naturally
-4. Receive AI-generated contextual answers
+4. Get contextual AI responses
 
 Optional:
 
-* Enable prompt refinement for accuracy
-* Use summarization for quick insights
+* Enable prompt refinement
+* Generate document summaries
 
 ---
 
@@ -164,17 +171,20 @@ Optional:
 
 ---
 
+## 👨‍💻 Maintained By
+
+**Hindav Deshmukh**
+AI • Data Engineering • Machine Learning
+
+GitHub: https://github.com/hindav
+LinkedIn: https://www.linkedin.com/in/hindav/
+
+---
+
 ## 📜 License
 
 MIT License — free to use, modify, and distribute with attribution.
 
 ---
 
-## 👨‍💻 Maintained By
-
-**Hindav Deshmukh**
-AI • Data Engineering • Machine Learning
-
----
-
-⭐ If you found this useful, consider starring the repository!
+⭐ If you find this project useful, consider starring the repository!
