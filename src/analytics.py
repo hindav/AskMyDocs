@@ -11,9 +11,11 @@ import re
 # Download required NLTK data (if not already present, though we ran commands for this earlier)
 try:
     nltk.data.find('tokenizers/punkt')
+    nltk.data.find('tokenizers/punkt_tab')
     nltk.data.find('corpora/stopwords')
 except LookupError:
     nltk.download('punkt')
+    nltk.download('punkt_tab')
     nltk.download('stopwords')
 
 def generate_summary(text, api_key):
