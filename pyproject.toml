@@ -1,6 +1,6 @@
 [project]
 name = "chatdoc"
-version = "0.1.0"
+version = "2.9.25"
 description = "ChatDoc is a web-based application that allows users to interact with and query multiple document types using a conversational AI interface. It supports PDF, TXT, CSV, and DOCX files, providing dynamic responses based on the content of uploaded documents."
 readme = "README.md"
 authors = [
@@ -14,9 +14,9 @@ requires-python = ">=3.9"
 dependencies = [
     "streamlit>=1.38.0",
     "langchain>=0.2.15",
-    "langchain-community>=0.2.15",
-    "langchain-openai>=0.1.23",
-    "exceptiongroup>=1.2.2",
+    "langchain-ollama",
+    "langchain-openai",
+    "pymupdf",
     "faiss-cpu>=1.8.0.post1",
     "pypdf2>=3.0.1",
     "python-dotenv>=1.0.1",

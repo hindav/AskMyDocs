@@ -1,7 +1,8 @@
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.chains import create_history_aware_retriever, create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_classic.chains import create_history_aware_retriever, create_retrieval_chain
+from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 import streamlit as st
 from dotenv import load_dotenv
 import os
@@ -17,32 +18,51 @@ prompt_search_query = ChatPromptTemplate.from_messages([
 ])
 
 prompt_get_answer = ChatPromptTemplate.from_messages([
-    ("system", "You are an AI assistant that answers questions based on the provided context. When asked, use your general knowledge to respond if the context does not have the necessary information. For greetings or unrelated queries, respond appropriately without relying solely on the context."),
+    ("system", """You are a professional medical/dental AI assistant preparing students for exams. 
+    Follow these specific length requirements:
+    1. If the user asks for a 'Short Note' or 'Short Answer': Provide a comprehensive, structured answer roughly equivalent to 1 full page (approx 500-600 words). Use headings, bullet points, and clinical significance.
+    2. If the user asks for a 'Long Note' or 'Long Answer': Provide an exhaustive, detailed answer equivalent to 3 full pages (approx 1500-1800 words). Include classification, etiology, pathophysiology, clinical features, histopathology, diagnosis, and management in depth.
+    3. For all other queries: Be concise but thorough.
+    
+    Answer ONLY based on the provided context if possible. If the context is insufficient, state that first, then use your knowledge base."""),
     MessagesPlaceholder(variable_name="chat_history"),
     ("user", "{input}"),
-    ("system", "Here is the context from the documents (if available):"),
+    ("system", "Context from books:"),
     ("user", "{context}"),
-    ("system", "Based on the context and your general knowledge, provide the most relevant and complete answer to the user's query.")
 ])
 
 def get_conversationchain(vectorstore, api_key=None):
+    # Try to get API key from: 1. Argument, 2. Env Var, 3. Streamlit Secrets (for Cloud)
     if not api_key:
         api_key = os.getenv("GROQ_API_KEY")
-
     if not api_key:
-        st.error("GROQ_API_KEY not found. Please provide it in the sidebar settings or .env file.")
-        return None
+        try:
+            if "GROQ_API_KEY" in st.secrets:
+                api_key = st.secrets["GROQ_API_KEY"]
+        except Exception:
+            # secrets.toml doesn't exist or isn't accessible
+            pass
 
     try:
-        # Use Groq API (OpenAI-compatible)
-        llm = ChatOpenAI(
-            model="llama-3.3-70b-versatile",
-            temperature=0.2,
-            base_url="https://api.groq.com/openai/v1",
-            api_key=api_key
-        )
+        if api_key:
+            llm = ChatOpenAI(
+                model="llama-3.3-70b-versatile",
+                temperature=0.2,
+                base_url="https://api.groq.com/openai/v1",
+                api_key=api_key
+            )
+        else:
+            # Check if we are running locally (Ollama only works locally)
+            try:
+                llm = ChatOllama(
+                    model="llama3.2",
+                    temperature=0.2,
+                )
+            except Exception:
+                st.error("⚠️ **Ollama not found.** If you are running this online, you MUST provide a Groq API Key in the sidebar.")
+                return None
         
-        retriever = vectorstore.as_retriever()
+        retriever = vectorstore.as_retriever(search_kwargs={"k": 5})
 
         # Create history-aware retriever
         retriever_chain = create_history_aware_retriever(llm, retriever, prompt_search_query)
@@ -70,49 +90,46 @@ def format_chat_history(chat_history):
 def get_ai_response(question, api_key=None):
     if st.session_state.conversation:
         try:
-            # Format the chat history properly
             formatted_history = format_chat_history(st.session_state.chat_history)
             
-            # Prepare the input for the chain
             chain_input = {
                 "chat_history": formatted_history,
                 "input": question
             }
 
-            # Invoke the chain
             response = st.session_state.conversation.invoke(chain_input)
             
-            # Extract the answer from the response
-            answer = response.get('answer', None)
+            answer = response.get('answer', "")
             context = response.get('context', [])
 
-            # Source Citations
+            # Image extraction from context
+            found_images = []
             sources_text = ""
             if context:
                 sources_text += "\n\n---\n**📚 Sources:**"
                 unique_sources = set()
                 for doc in context:
-                    source = doc.metadata.get('source', 'Unknown Document')
-                    unique_sources.add(os.path.basename(source))
+                    src_name = os.path.basename(doc.metadata.get('source', 'Unknown'))
+                    page_num = doc.metadata.get('page', '?')
+                    unique_sources.add(f"{src_name} (Page {page_num})")
+                    
+                    # Collect images
+                    page_images = doc.metadata.get('images', [])
+                    for img in page_images:
+                        if img not in found_images:
+                            found_images.append(img)
                 
                 for src in unique_sources:
                     sources_text += f"\n- `{src}`"
 
-            # If no answer, fall back to general response
-            if not answer or answer.strip() == "":
-                fallback_llm = ChatOpenAI(
-                    temperature=0.7,
-                    base_url="https://api.groq.com/openai/v1",
-                    api_key=api_key or os.getenv("GROQ_API_KEY"),
-                    model="llama-3.3-70b-versatile"
-                )
-                answer = fallback_llm.invoke([HumanMessage(content=question)]).content.strip()
-
-            return answer + sources_text
+            return {
+                "answer": answer + sources_text,
+                "images": found_images
+            }
 
         except Exception as e:
             st.error(f"Error processing question: {str(e)}")
             return None
     else:
-        st.error("Please process documents first before asking questions.")
+        st.error("Please process documents first.")
         return None

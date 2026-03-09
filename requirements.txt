@@ -1,0 +1,18 @@
+streamlit>=1.38.0
+langchain>=0.2.15
+langchain-ollama
+langchain-openai
+pymupdf
+faiss-cpu>=1.8.0.post1
+pypdf2>=3.0.1
+python-dotenv>=1.0.1
+unstructured>=0.15.9
+transformers
+torch>=2.4.1 --extra-index-url https://download.pytorch.org/whl/cpu
+langchain-huggingface
+sentence-transformers
+pillow
+wordcloud
+matplotlib
+plotly
+nltk
