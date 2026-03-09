@@ -2,50 +2,56 @@
 
 ### Chat with Your Documents using AI (RAG)
 
-Welcome to **AskMyDocs** — an AI-powered document chatbot built with **Retrieval-Augmented Generation (RAG)**. This project enables you to upload multiple documents and interact with them conversationally using natural language.
+Welcome to **AskMyDocs** — an AI-powered document chatbot that allows you to upload documents and interact with them conversationally. Built using **Retrieval-Augmented Generation (RAG)**, it combines document retrieval, embeddings, and large language models to deliver contextual answers directly from your files.
 
-It combines modern AI retrieval techniques with fast LLM inference and a clean Streamlit interface to deliver accurate, context-aware answers from your documents.
+---
+
+## 🎥 Project Demo
+
+[![Watch Demo](https://img.youtube.com/vi/sYKnJxIQ0pE/0.jpg)](https://youtu.be/sYKnJxIQ0pE)
+
+👉 Click the image above to watch the full demo video.
 
 ---
 
 ## ✨ Overview
 
-**AskMyDocs** allows users to:
+AskMyDocs simplifies document analysis using AI:
 
-* Upload documents in multiple formats
-* Extract meaningful information instantly
-* Ask questions conversationally
-* Generate summaries and contextual answers
+* Upload multiple files
+* Ask questions naturally
+* Receive contextual AI-generated answers
+* Quickly extract insights without manual searching
 
-The project integrates document retrieval, embeddings, vector databases, and large language models to create a seamless document-chat experience.
+This project demonstrates how modern AI pipelines can transform document interaction and knowledge retrieval.
 
 ---
 
 ## 🚀 Features
 
-### 📂 Document Handling
+### 📂 Document Processing
 
-* Multi-file upload support (PDF, TXT, CSV, DOCX)
-* Automatic text extraction and preprocessing
-* Intelligent document chunking
+* Supports PDF, TXT, CSV, DOCX files
+* Automatic text extraction
+* Efficient document chunking and embedding
 
-### 🤖 AI-Powered Chat
+### 🤖 AI Chatbot
 
-* Natural language Q&A from documents
-* Context-aware conversation memory
-* Retrieval-Augmented Generation (RAG) pipeline
+* Conversational Q&A from documents
+* Context-aware responses
+* Retrieval-Augmented Generation pipeline
 
 ### 🧠 Smart Enhancements
 
-* Prompt refinement toggle for better queries
-* Document summarization capability
-* Fast inference powered by Groq LLMs
+* Optional prompt refinement
+* Document summarization
+* Fast inference powered by Groq LLM
 
 ### 💻 User Interface
 
-* Streamlit-based interactive UI
-* Simple, responsive experience
-* Easy document management
+* Streamlit interactive dashboard
+* Simple upload & chat workflow
+* Clean, responsive design
 
 ---
 
@@ -72,12 +78,12 @@ The project integrates document retrieval, embeddings, vector databases, and lar
 
 ## 📋 Requirements
 
-* Python **3.9+**
-* `uv` package manager (recommended)
+* Python 3.9+
+* UV package manager recommended
 
-Install uv if needed:
+Install uv:
 
-```bash
+```
 pip install uv
 ```
 
@@ -85,100 +91,100 @@ pip install uv
 
 ## 🔑 Environment Setup
 
-Create a `.env` file in the root directory:
+Create `.env` file in root:
 
-```env
+```
 GROQ_API_KEY=your_api_key_here
 ```
 
-This key is required for AI inference.
+Required for AI inference.
 
 ---
 
-## 💻 Installation & Setup
+## 💻 Installation
 
-### 1️⃣ Clone Repository
+### Clone Repository
 
-```bash
-git clone https://github.com/hindav/ChatDoc.git
-cd ChatDoc
+```
+git clone https://github.com/hindav/AskMyDocs.git
+cd AskMyDocs
 ```
 
-### 2️⃣ Run Application
+### Run Application
 
 Using uv:
 
-```bash
+```
 uv run streamlit run src/app.py
 ```
 
 Or:
 
-```bash
+```
 bash setup.sh
 ```
 
 ---
 
-## ▶️ Running the App
+## ▶️ Access the App
 
-After starting:
+Open browser:
 
 ```
 http://localhost:8501
 ```
 
-Open this in your browser to access the interface.
-
 ---
 
-## 📝 Usage Guide
+## 📝 Usage
 
-1. Upload one or more documents
+1. Upload documents
 2. System converts them into embeddings
 3. Ask questions naturally
-4. Get contextual AI-generated responses
+4. Get contextual AI responses
 
 Optional:
 
-* Enable prompt refinement for better accuracy
-* Use summarization for quick document insights
+* Enable prompt refinement
+* Generate document summaries
 
 ---
 
 ## 🧰 Tech Stack
 
-* Streamlit — Frontend UI
-* LangChain — AI orchestration
-* FAISS — Vector similarity search
-* HuggingFace Embeddings — Text embeddings
-* Groq LLM (Llama 3.3 70B) — Fast AI inference
-* Python — Core backend
+* Python
+* Streamlit
+* LangChain
+* FAISS Vector Database
+* HuggingFace Embeddings
+* Groq LLM (Llama models)
 
 ---
 
 ## 🎯 Use Cases
 
 * Research document analysis
-* Study material querying
-* Knowledge base assistants
+* Study material Q&A
+* Knowledge base assistant
 * Business document exploration
-* Personal document organization
-
----
-
-## 📜 License
-
-This project is licensed under the **MIT License**.
-You are free to use, modify, and distribute it with proper attribution.
+* Personal document AI assistant
 
 ---
 
 ## 👨‍💻 Maintained By
 
 **Hindav Deshmukh**
-AI • Data Engineering • ML Systems
+AI • Data Engineering • Machine Learning
+
+GitHub: https://github.com/hindav
+LinkedIn: https://www.linkedin.com/in/hindav/
 
 ---
 
-⭐ If you find this useful, consider starring the repository!
+## 📜 License
+
+MIT License — free to use, modify, and distribute with attribution.
+
+---
+
+⭐ If you find this project useful, consider starring the repository!

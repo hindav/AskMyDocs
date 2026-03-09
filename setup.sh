@@ -10,7 +10,6 @@ echo "Starting setup script..."
 if ! command -v uv &> /dev/null; then
     echo "Error: 'uv' is not installed. Please install it first."
     echo "To install consistently: pip install uv"
-    echo "Visit https://github.com/astral-sh/uv for more meaningful installation instructions."
     exit 1
 fi
 echo "uv is installed. Proceeding..."
